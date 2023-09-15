@@ -16,12 +16,14 @@ const swap = (array, i, j) => {
     array[j] = tmp;
 };
 
+const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+
 const quickSortInPlace = (array, leftmostIndex = 0, rightmostIndex = array.length - 1) => {
     if (rightmostIndex - leftmostIndex < 1) {
         return array;
     }
 
-    let pivot = array[Math.floor((leftmostIndex + rightmostIndex) / 2)];
+    let pivot = array[random(leftmostIndex, rightmostIndex)];
     let left = leftmostIndex;
     let right = rightmostIndex;
 

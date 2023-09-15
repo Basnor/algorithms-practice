@@ -1,6 +1,9 @@
-# Algorithms
+# Алгоритмы
 
 ### Введение в алгоритмы
+
+<details>
+<summary>Список задач</summary>
 
 | Задача                                          | Описание |
 | ----------------------------------------------- | -------- |
@@ -11,10 +14,15 @@
 | [E. Самое длинное слово](introduction/E.js)     |          |
 | [F. Палиндром](introduction/F.js)               |          |
 | ...                                             |          |
-| [A. Ближайший ноль](introduction/Y.js)          |          |
-| [B. Ловкость рук](introduction/Z.js)            |          |
+| [Y. Ближайший ноль](introduction/Y.js)          |          |
+| [Z. Ловкость рук](introduction/Z.js)            |          |
+
+</details>
 
 ### Основные структуры данных
+
+<details>
+<summary>Список задач</summary>
 
 | Задача                                                      | Описание                           |
 | ----------------------------------------------------------- | ---------------------------------- |
@@ -28,7 +36,12 @@
 | [Y. Дек](basicDataStructures/Y.js)                          | [README](basicDataStructures/Y.md) |
 | [Z. Калькулятор](basicDataStructures/Z.js)                  | [README](basicDataStructures/Z.md) |
 
+</details>
+
 ### Рекурсия и сортировки
+
+<details>
+<summary>Список задач</summary>
 
 | Задача                                                        | Описание                           |
 | ------------------------------------------------------------- | ---------------------------------- |
@@ -43,3 +56,5 @@
 | ...                                                           |                                    |
 | [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)      | [README](recursionAndSorting/Y.md) |
 | [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js) | [README](recursionAndSorting/Z.md) |
+
+</details>
