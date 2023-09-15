@@ -1,40 +1,45 @@
-# algorithms-practice
+# Algorithms
 
 ### Введение в алгоритмы
 
--   [A. Значения функции](part_1/A.js)
--   [B. Чётные и нечётные числа](part_1/B.js)
--   [C. Соседи](part_1/C.js)
--   [D. Хаотичность погоды](part_1/D.js)
--   [E. Самое длинное слово](part_1/E.js)
--   [F. Палиндром](part_1/F.js)
-
----
-
--   [A. Ближайший ноль](part_1/_AA.js)
--   [B. Ловкость рук](part_1/_BB.js)
+| Задача                                          | Описание |
+| ----------------------------------------------- | -------- |
+| [A. Значения функции](introduction/A.js)        |          |
+| [B. Чётные и нечётные числа](introduction/B.js) |          |
+| [C. Соседи](introduction/C.js)                  |          |
+| [D. Хаотичность погоды](introduction/D.js)      |          |
+| [E. Самое длинное слово](introduction/E.js)     |          |
+| [F. Палиндром](introduction/F.js)               |          |
+| ...                                             |          |
+| [A. Ближайший ноль](introduction/Y.js)          |          |
+| [B. Ловкость рук](introduction/Z.js)            |          |
 
 ### Основные структуры данных
 
--   [B. Список дел](part_2/B.js)
--   [C. Нелюбимое дело](part_2/C.js)
--   [D. Заботливая мама](part_2/D.js)
--   [E. Всё наоборот](part_2/E.js)
--   [F. Стек - Max](part_2/F.js)
--   [H. Скобочная последовательность](part_2/H.js)
-
----
-
--   [A. Дек](part_2/_AA/_AA.js)
--   [B. Калькулятор](part_2/_BB/_BB.js)
+| Задача                                                      | Описание                           |
+| ----------------------------------------------------------- | ---------------------------------- |
+| [B. Список дел](basicDataStructures/B.js)                   |                                    |
+| [C. Нелюбимое дело](basicDataStructures/C.js)               |                                    |
+| [D. Заботливая мама](basicDataStructures/D.js)              |                                    |
+| [E. Всё наоборот](basicDataStructures/E.js)                 |                                    |
+| [F. Стек - Max](basicDataStructures/F.js)                   |                                    |
+| [H. Скобочная последовательность](basicDataStructures/H.js) |                                    |
+| ...                                                         |                                    |
+| [Y. Дек](basicDataStructures/Y.js)                          | [README](basicDataStructures/Y.md) |
+| [Z. Калькулятор](basicDataStructures/Z.js)                  | [README](basicDataStructures/Z.md) |
 
 ### Рекурсия и сортировки
 
--   [A. Генератор скобок](part_3/A.js)
--   [B. Комбинации](part_3/B.js)
--   [C. Подпоследовательность](part_3/C.js)
--   [H. Большое число](part_3/H.js)
--   [J. Пузырёк](part_3/J.js)
--   [K. Сортировка слиянием](part_3/J.js)
--   [L. Два велосипеда](part_3/L.js)
--   [N. Клумбы](part_3/N.js)
+| Задача                                                        | Описание                           |
+| ------------------------------------------------------------- | ---------------------------------- |
+| [A. Генератор скобок](recursionAndSorting/A.js)               |                                    |
+| [B. Комбинации](recursionAndSorting/B.js)                     |                                    |
+| [C. Подпоследовательность](recursionAndSorting/C.js)          |                                    |
+| [H. Большое число](recursionAndSorting/H.js)                  |                                    |
+| [J. Пузырёк](recursionAndSorting/J.js)                        |                                    |
+| [K. Сортировка слиянием](recursionAndSorting/J.js)            |                                    |
+| [L. Два велосипеда](recursionAndSorting/L.js)                 |                                    |
+| [N. Клумбы](recursionAndSorting/N.js)                         |                                    |
+| ...                                                           |                                    |
+| [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)      | [README](recursionAndSorting/Y.md) |
+| [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js) | [README](recursionAndSorting/Z.md) |
