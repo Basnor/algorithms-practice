@@ -5,17 +5,20 @@
 <details>
 <summary>Список задач</summary>
 
-| Задача                                          | Описание |
-| ----------------------------------------------- | -------- |
-| [A. Значения функции](introduction/A.js)        |          |
-| [B. Чётные и нечётные числа](introduction/B.js) |          |
-| [C. Соседи](introduction/C.js)                  |          |
-| [D. Хаотичность погоды](introduction/D.js)      |          |
-| [E. Самое длинное слово](introduction/E.js)     |          |
-| [F. Палиндром](introduction/F.js)               |          |
-| ...                                             |          |
-| [Y. Ближайший ноль](introduction/Y.js)          |          |
-| [Z. Ловкость рук](introduction/Z.js)            |          |
+| Задача                                          | Описание                                               |
+| ----------------------------------------------- | ------------------------------------------------------ |
+| [A. Значения функции](introduction/A.js)        |                                                        |
+| [B. Чётные и нечётные числа](introduction/B.js) |                                                        |
+| [C. Соседи](introduction/C.js)                  | Возвращает всех соседей элемента **матрицы**           |
+| [D. Хаотичность погоды](introduction/D.js)      | Вычисляет длину последовательности                     |
+| [E. Самое длинное слово](introduction/E.js)     | Возвращает самое длинное слово в строке                |
+| [F. Палиндром](introduction/F.js)               | Проверяет является ли строка палиндромом               |
+| [G. Работа из дома](introduction/G.js)          | Переводит целое число из десятичной системы в двоичную |
+| ...                                             |                                                        |
+| [Y. Ближайший ноль](introduction/Y.js)          | Считает расстояния до ближайшего нуля за O(n)          |
+| [Z. Ловкость рук](introduction/Z.js)            | Считает сумму элементов в **матрице**                  |
+
+> [_Контест 1_](https://contest.yandex.ru/contest/22449/problems/), [_Контест 2_](https://contest.yandex.ru/contest/22450/problems/)
 
 </details>
 
@@ -56,5 +59,16 @@
 | ...                                                           |                                    |
 | [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)      | [README](recursionAndSorting/Y.md) |
 | [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js) | [README](recursionAndSorting/Z.md) |
+
+</details>
+
+### Хэш-функции
+
+<details>
+<summary>Список задач</summary>
+
+| Задача                          | Описание |
+| ------------------------------- | -------- |
+| [D. Кружки](hashFunctions/D.js) |          |
 
 </details>
