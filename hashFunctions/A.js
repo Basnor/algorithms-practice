@@ -1,10 +1,8 @@
-const countHash = (a, m, s) => {
+const getPolyhash = (base, mod, str) => {
     let hash = 0;
 
-    for (let i = 0; i < s.length; i++) {
-        const isLastChar = i === s.length - 1;
-
-        hash = ((hash + s.charCodeAt(i)) * (isLastChar ? 1 : a)) % m;
+    for (const char of str) {
+        hash = (hash * base + char.charCodeAt(0)) % mod;
     }
 
     return hash;
@@ -19,7 +17,7 @@ rl.on("line", (line) => {
     } else {
         lines.push(line);
 
-        console.log(countHash(...lines));
+        console.log(getPolyhash(...lines));
 
         rl.close();
     }
