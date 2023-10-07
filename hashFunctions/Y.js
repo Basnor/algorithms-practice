@@ -1,40 +1,54 @@
-const countMatches = (documentWords, requestWords) => {
-    const counter = [];
+const addToDocumentsMap = (documentsMap, documentIndex, words) => {
+    for (const word of words) {
+        if (documentsMap.has(word)) {
+            if (!documentsMap.get(word)[documentIndex]) {
+                documentsMap.get(word)[documentIndex] = { count: 1 };
+            } else {
+                documentsMap.get(word)[documentIndex].count++;
+            }
+        } else {
+            const countArray = new Array(documentIndex);
+            countArray.push({ count: 1 });
+
+            documentsMap.set(word, countArray);
+        }
+    }
+};
+
+const countMatchesByDocuments = (documentsWords, requestWords) => {
+    const matchCounter = [];
 
     for (const word of requestWords) {
-        if (!documentWords.has(word)) {
+        if (!documentsWords.has(word)) {
             continue;
         }
 
-        const documentWordInfo = documentWords.get(word);
+        const documentMatch = documentsWords.get(word);
 
-        for (let i = 0; i < documentWordInfo.length; i++) {
-            const count = documentWordInfo[i]?.count;
+        for (let i = 0; i < documentMatch.length; i++) {
+            const count = documentMatch[i]?.count;
 
-            if (!count) {
-                continue;
+            if (count) {
+                matchCounter[i] = (matchCounter[i] || 0) + count;
             }
-
-            counter[i] = (counter[i] || 0) + count;
         }
     }
 
-    const result = Array.from(counter.keys())
-        .filter((key) => counter[key] !== undefined)
-        .sort((a, b) => counter[b] - counter[a])
-        .slice(0, 5);
-
-    return result;
+    return matchCounter;
 };
 
-const getRequestRelevance = (documents, request) => {
-    const relevanceMap = countMatches(documents, request);
+const getRequestRelevance = (documentsMap, requestSet) => {
+    const matches = countMatchesByDocuments(documentsMap, requestSet);
+    const relevance = Array.from(matches.keys())
+        .filter((index) => matches[index] !== undefined)
+        .sort((a, b) => matches[b] - matches[a])
+        .slice(0, 5);
 
-    console.log(relevanceMap.map((item) => item + 1).join(" "));
+    console.log(relevance.map((item) => item + 1).join(" "));
 };
 
 const documentsMap = new Map();
-let requestsCounter = 0;
+let requestIndex = 0;
 let documentIndex = 0;
 let requestsNumber, documentsNumber;
 const readline = require("readline");
@@ -47,20 +61,7 @@ rl.on("line", (line) => {
     }
 
     if (documentIndex < documentsNumber) {
-        for (const word of line.split(" ")) {
-            if (documentsMap.has(word)) {
-                if (!documentsMap.get(word)[documentIndex]) {
-                    documentsMap.get(word)[documentIndex] = { count: 1 };
-                } else {
-                    documentsMap.get(word)[documentIndex].count++;
-                }
-            } else {
-                const array = new Array(documentIndex);
-                array.push({ count: 1 });
-                documentsMap.set(word, array);
-            }
-        }
-
+        addToDocumentsMap(documentsMap, documentIndex, line.split(" "));
         documentIndex++;
         return;
     }
@@ -70,11 +71,11 @@ rl.on("line", (line) => {
         return;
     }
 
-    if (requestsCounter < requestsNumber) {
+    if (requestIndex < requestsNumber) {
         getRequestRelevance(documentsMap, new Set(line.split(" ")));
-        requestsCounter++;
+        requestIndex++;
 
-        if (requestsCounter !== requestsNumber) {
+        if (requestIndex !== requestsNumber) {
             return;
         }
     }
