@@ -1,42 +1,41 @@
-const countMatches = (document, words) => {
-    let counter = 0;
+const countMatches = (documentWords, requestWords) => {
+    const counter = [];
 
-    for (const word of words) {
-        if (document.has(word)) {
-            counter += document.get(word).count;
-        }
-    }
-
-    return counter;
-};
-
-const getRequestRelevance = (documents, request) => {
-    const relevanceMap = new Map();
-
-    for (let i = 0; i < documents.length; i++) {
-        const relevance = countMatches(documents[i], request);
-
-        if (relevance === 0) {
+    for (const word of requestWords) {
+        if (!documentWords.has(word)) {
             continue;
         }
 
-        if (relevanceMap.has(relevance)) {
-            relevanceMap.get(relevance).push(i);
-        } else {
-            relevanceMap.set(relevance, [i]);
+        const documentWordInfo = documentWords.get(word);
+
+        for (let i = 0; i < documentWordInfo.length; i++) {
+            const count = documentWordInfo[i]?.count;
+
+            if (!count) {
+                continue;
+            }
+
+            counter[i] = (counter[i] || 0) + count;
         }
     }
 
-    const relevance = [...relevanceMap.keys()]
-        .sort((a, b) => b - a)
-        .flatMap((relevance) => relevanceMap.get(relevance))
+    const result = Array.from(counter.keys())
+        .filter((key) => counter[key] !== undefined)
+        .sort((a, b) => counter[b] - counter[a])
         .slice(0, 5);
 
-    console.log(relevance.map((item) => item + 1).join(" "));
+    return result;
 };
 
-const documents = [];
+const getRequestRelevance = (documents, request) => {
+    const relevanceMap = countMatches(documents, request);
+
+    console.log(relevanceMap.map((item) => item + 1).join(" "));
+};
+
+const documentsMap = new Map();
 let requestsCounter = 0;
+let documentIndex = 0;
 let requestsNumber, documentsNumber;
 const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin });
@@ -47,17 +46,22 @@ rl.on("line", (line) => {
         return;
     }
 
-    if (documents.length < documentsNumber) {
-        const wordsMap = new Map();
+    if (documentIndex < documentsNumber) {
         for (const word of line.split(" ")) {
-            if (wordsMap.has(word)) {
-                wordsMap.get(word).count++;
+            if (documentsMap.has(word)) {
+                if (!documentsMap.get(word)[documentIndex]) {
+                    documentsMap.get(word)[documentIndex] = { count: 1 };
+                } else {
+                    documentsMap.get(word)[documentIndex].count++;
+                }
             } else {
-                wordsMap.set(word, { count: 1 });
+                const array = new Array(documentIndex);
+                array.push({ count: 1 });
+                documentsMap.set(word, array);
             }
         }
 
-        documents.push(wordsMap);
+        documentIndex++;
         return;
     }
 
@@ -67,7 +71,7 @@ rl.on("line", (line) => {
     }
 
     if (requestsCounter < requestsNumber) {
-        getRequestRelevance(documents, new Set(line.split(" ")));
+        getRequestRelevance(documentsMap, new Set(line.split(" ")));
         requestsCounter++;
 
         if (requestsCounter !== requestsNumber) {
