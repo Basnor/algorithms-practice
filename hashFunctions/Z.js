@@ -9,56 +9,57 @@ class HashTable {
     }
 
     put(key, value) {
-        const bucket = this.#getPolyhash(key) % this._tableSize;
+        let i = this.#getPolyhash(key) % this._tableSize;
 
-        let i = bucket % this._tableSize;
-        while (this.table[i] || this.table[i] !== "deleted") {
-            if (this.table[i]?.key === key) {
+        while (this.table[i]) {
+            if (this.table[i].key === key) {
                 this.table[i].value = value;
                 return;
             }
 
-            i++;
+            i = this.#getNexStep(i);
         }
 
         this.table[i] = { key, value };
     }
 
     get(key) {
-        const bucket = this.#getPolyhash(key) % this._tableSize;
-        let i = bucket % this._tableSize;
+        let i = this.#getPolyhash(key) % this._tableSize;
 
         while (this.table[i]?.key !== key) {
             if (!this.table[i]) {
-                console.log("None");
-                return;
+                return "None";
             }
 
-            i++;
+            i = this.#getNexStep(i);
         }
 
-        console.log(this.table[i].value);
+        return this.table[i].value;
     }
 
     delete(key) {
-        const bucket = this.#getPolyhash(key) % this._tableSize;
-        let i = bucket % this._tableSize;
+        let i = this.#getPolyhash(key) % this._tableSize;
 
         while (this.table[i]?.key !== key) {
             if (!this.table[i]) {
-                console.log("None");
-                return;
+                return "None";
             }
 
-            i++;
+            i = this.#getNexStep(i);
         }
 
-        console.log(this.table[i].value);
+        const returnedValue = this.table[i].value;
 
         this.table[i] = "deleted";
 
         this.#cleanDeleted(++this.deletedCount);
+
+        return returnedValue;
     }
+
+    #getNexStep = (step) => {
+        return (7 * step + 51 * step * step) % this._tableSize;
+    };
 
     #getPolyhash = (str) => {
         let hash = 0;
@@ -75,15 +76,12 @@ class HashTable {
             return;
         }
 
-        for (let i = 0; i < this._tableSize; i++) {
-            if (this.table[i] === "deleted") {
-                this.table[i] = undefined;
-            }
-        }
+        const copy = [...this.table];
+        this.table = new Array(this._tableSize);
 
         for (let i = 0; i < this._tableSize; i++) {
-            if (this.table[i]) {
-                this.put(this.table[i].key, this.table[i].value);
+            if (copy[i] && copy[i] !== "deleted") {
+                this.put(copy[i].key, copy[i].value);
             }
         }
 
@@ -93,6 +91,7 @@ class HashTable {
 
 let linesNumber;
 let lineIndex = 0;
+const output = [];
 const hashTable = new HashTable();
 const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin });
@@ -106,12 +105,15 @@ rl.on("line", (line) => {
     if (lineIndex < linesNumber) {
         const [command, key, value] = parseLine(line);
 
-        hashTable[command](key, value);
+        const result = hashTable[command](key, value);
+        result !== undefined && output.push(result);
 
         lineIndex++;
     }
 
     if (lineIndex === linesNumber) {
+        console.log(output.join("\n"));
+
         rl.close();
     }
 });
