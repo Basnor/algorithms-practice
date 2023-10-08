@@ -1,22 +1,17 @@
 class HashTable {
-    TABLE_SIZE = 1000;
-    BASE = 100;
-    MOD = 100003;
+    _tableSize = 1000;
+    _base = 123;
+    _mod = 100009;
 
     constructor() {
-        this.table = new Array(this.TABLE_SIZE);
+        this.table = new Array(this._tableSize);
         this.deletedCount = 0;
     }
 
     put(key, value) {
-        const bucket = this.#getPolyhash(key) % this.TABLE_SIZE;
+        const bucket = this.#getPolyhash(key) % this._tableSize;
 
-        if (!this.table[bucket] || this.table[bucket] === "deleted") {
-            this.table[bucket] = { key, value };
-            return;
-        }
-
-        let i = bucket % this.TABLE_SIZE;
+        let i = bucket % this._tableSize;
         while (this.table[i] || this.table[i] !== "deleted") {
             if (this.table[i]?.key === key) {
                 this.table[i].value = value;
@@ -30,14 +25,8 @@ class HashTable {
     }
 
     get(key) {
-        const bucket = this.#getPolyhash(key) % this.TABLE_SIZE;
-
-        if (!this.table[bucket]) {
-            console.log("None");
-            return;
-        }
-
-        let i = bucket % this.TABLE_SIZE;
+        const bucket = this.#getPolyhash(key) % this._tableSize;
+        let i = bucket % this._tableSize;
 
         while (this.table[i]?.key !== key) {
             if (!this.table[i]) {
@@ -52,16 +41,15 @@ class HashTable {
     }
 
     delete(key) {
-        const bucket = this.#getPolyhash(key) % this.TABLE_SIZE;
-
-        if (!this.table[bucket] || this.table[bucket] === "deleted") {
-            console.log("None");
-            return;
-        }
-
-        let i = bucket % this.TABLE_SIZE;
+        const bucket = this.#getPolyhash(key) % this._tableSize;
+        let i = bucket % this._tableSize;
 
         while (this.table[i]?.key !== key) {
+            if (!this.table[i]) {
+                console.log("None");
+                return;
+            }
+
             i++;
         }
 
@@ -69,33 +57,37 @@ class HashTable {
 
         this.table[i] = "deleted";
 
-        this.#cleanDeleted(this.deletedCount++);
+        this.#cleanDeleted(++this.deletedCount);
     }
 
     #getPolyhash = (str) => {
         let hash = 0;
 
         for (const char of str) {
-            hash = (hash * this.BASE + char.charCodeAt(0)) % this.MOD;
+            hash = (hash * this._base + char.charCodeAt(0)) % this._mod;
         }
 
         return hash;
     };
 
     #cleanDeleted = (number) => {
-        if (number < this.TABLE_SIZE / 2) {
+        if (number < this._tableSize / 2) {
             return;
         }
 
-        for (let i = 0; i < this.TABLE_SIZE; i++) {
-            if (this.table[i]) {
-                if (this.table[i] === "deleted") {
-                    this.table[i] = undefined;
-                } else {
-                    this.put(this.table[i].key, this.table[i].value);
-                }
+        for (let i = 0; i < this._tableSize; i++) {
+            if (this.table[i] === "deleted") {
+                this.table[i] = undefined;
             }
         }
+
+        for (let i = 0; i < this._tableSize; i++) {
+            if (this.table[i]) {
+                this.put(this.table[i].key, this.table[i].value);
+            }
+        }
+
+        this.deletedCount = 0;
     };
 }
 
