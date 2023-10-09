@@ -1,7 +1,7 @@
 class HashTable {
-    _tableSize = 1000;
+    _tableSize = 1024;
     _base = 123;
-    _mod = 100009;
+    _mod = 10003;
 
     constructor() {
         this.table = new Array(this._tableSize);
@@ -17,7 +17,7 @@ class HashTable {
                 return;
             }
 
-            i = this.#getNexStep(i);
+            i = this.#getNextStep(i);
         }
 
         this.table[i] = { key, value };
@@ -31,7 +31,7 @@ class HashTable {
                 return "None";
             }
 
-            i = this.#getNexStep(i);
+            i = this.#getNextStep(i);
         }
 
         return this.table[i].value;
@@ -45,7 +45,7 @@ class HashTable {
                 return "None";
             }
 
-            i = this.#getNexStep(i);
+            i = this.#getNextStep(i);
         }
 
         const returnedValue = this.table[i].value;
@@ -57,8 +57,8 @@ class HashTable {
         return returnedValue;
     }
 
-    #getNexStep = (step) => {
-        return (7 * step + 51 * step * step) % this._tableSize;
+    #getNextStep = (step) => {
+        return (3 * step + 51 * step * step) % this._tableSize;
     };
 
     #getPolyhash = (str) => {
@@ -77,7 +77,7 @@ class HashTable {
         }
 
         const copy = [...this.table];
-        this.table = new Array(this._tableSize);
+        this.table.fill(undefined);
 
         for (let i = 0; i < this._tableSize; i++) {
             if (copy[i] && copy[i] !== "deleted") {
