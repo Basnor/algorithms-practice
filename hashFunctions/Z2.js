@@ -6,33 +6,38 @@ class Node {
 }
 
 class LinkedList {
-    constructor() {
-        this.head = undefined;
-    }
+    constructor() {}
 
-    put(key, value) {
-        let node = this.get(key);
-
-        if (node) {
-            node.value = value;
-        } else {
-            this.head = new Node({ key, value }, this.head);
-        }
-    }
-
-    get(key) {
+    putNode(key, value) {
         let node = this.head;
 
-        while (node && node.value.key !== key) {
+        while (node) {
+            if (node.value.key === key) {
+                node.value.value = value;
+                return;
+            }
+
             node = node.next;
         }
 
-        return node?.value;
+        this.head = new Node({ key, value }, this.head);
     }
 
-    delete(key) {
-        let prev;
+    getNode(key) {
         let node = this.head;
+
+        while (node) {
+            if (node.value.key === key) {
+                return node.value;
+            }
+
+            node = node.next;
+        }
+    }
+
+    deleteNode(key) {
+        let node = this.head;
+        let deletedNode = node?.next;
 
         if (node && node.value.key === key) {
             this.head = undefined;
@@ -40,60 +45,54 @@ class LinkedList {
             return node.value;
         }
 
-        while (node && node.value.key !== key) {
-            prev = node;
-            node = node.next;
+        if (deletedNode && deletedNode.value.key === key) {
+            this.head.next = deletedNode.next;
+
+            return deletedNode.value;
         }
 
-        if (prev) {
-            prev.next = node;
-        }
+        while (deletedNode) {
+            if (deletedNode.value.key === key) {
+                node.next = deletedNode.next;
 
-        return node?.value;
+                return deletedNode.value;
+            }
+
+            node = deletedNode;
+            deletedNode = deletedNode.next;
+        }
     }
 }
 
 class HashTable {
-    _tableSize = 1024;
-    _base = 123;
-    _mod = 10003;
+    _tableSize = 10000;
 
     constructor() {
-        this.table = new Array(this._tableSize);
+        this.table = new Array(this._tableSize).fill().map(() => new LinkedList());
     }
 
     put(key, value) {
         let i = this.#getHash(key) % this._tableSize;
 
-        if (!this.table[i]) {
-            this.table[i] = new LinkedList();
-        }
-
-        this.table[i].put(key, value);
+        this.table[i].putNode(key, value);
     }
 
     get(key) {
         let i = this.#getHash(key) % this._tableSize;
-        const { value } = this.table[i]?.get(key) || {};
+        const { value } = this.table[i].getNode(key) || {};
 
         return value ? value : "None";
     }
 
     delete(key) {
         let i = this.#getHash(key) % this._tableSize;
-        const { value } = this.table[i]?.delete(key) || {};
+        const { value } = this.table[i].deleteNode(key) || {};
 
         return value ? value : "None";
     }
 
     #getHash = (str) => {
-        let hash = 0;
-
-        for (const char of str) {
-            hash = (hash * this._base + char.charCodeAt(0)) % this._mod;
-        }
-
-        return hash;
+        return (str % this._tableSize) + this._tableSize;
     };
 }
 
@@ -127,5 +126,5 @@ rl.on("line", (line) => {
 });
 
 const parseLine = (line) => {
-    return line.split(" ").map((item, index) => (index < 2 ? item : +item));
+    return line.split(" ").map((item, index) => (index < 1 ? item : +item));
 };
