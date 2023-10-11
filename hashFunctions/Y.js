@@ -1,21 +1,21 @@
-const addToDocumentsMap = (documentsMap, documentIndex, words) => {
+const addWords = (wordsMap, index, words) => {
     for (const word of words) {
-        if (documentsMap.has(word)) {
-            if (!documentsMap.get(word)[documentIndex]) {
-                documentsMap.get(word)[documentIndex] = { count: 1 };
+        if (wordsMap.has(word)) {
+            if (!wordsMap.get(word)[index]) {
+                wordsMap.get(word)[index] = { count: 1 };
             } else {
-                documentsMap.get(word)[documentIndex].count++;
+                wordsMap.get(word)[index].count++;
             }
         } else {
-            const countArray = new Array(documentIndex);
+            const countArray = new Array(index);
             countArray.push({ count: 1 });
 
-            documentsMap.set(word, countArray);
+            wordsMap.set(word, countArray);
         }
     }
 };
 
-const countMatchesByDocuments = (documentsWords, requestWords) => {
+const countMatches = (documentsWords, requestWords) => {
     const matchCounter = [];
 
     for (const word of requestWords) {
@@ -37,8 +37,8 @@ const countMatchesByDocuments = (documentsWords, requestWords) => {
     return matchCounter;
 };
 
-const getRequestRelevance = (documentsMap, requestSet) => {
-    const matches = countMatchesByDocuments(documentsMap, requestSet);
+const getRelevance = (wordsMap, requestSet) => {
+    const matches = countMatches(wordsMap, requestSet);
     const relevance = Array.from(matches.keys())
         .filter((index) => matches[index] !== undefined)
         .sort((a, b) => matches[b] - matches[a])
@@ -47,7 +47,7 @@ const getRequestRelevance = (documentsMap, requestSet) => {
     console.log(relevance.map((item) => item + 1).join(" "));
 };
 
-const documentsMap = new Map();
+const wordsMap = new Map();
 let requestIndex = 0;
 let documentIndex = 0;
 let requestsNumber, documentsNumber;
@@ -61,7 +61,7 @@ rl.on("line", (line) => {
     }
 
     if (documentIndex < documentsNumber) {
-        addToDocumentsMap(documentsMap, documentIndex, line.split(" "));
+        addWords(wordsMap, documentIndex, line.split(" "));
         documentIndex++;
         return;
     }
@@ -72,7 +72,7 @@ rl.on("line", (line) => {
     }
 
     if (requestIndex < requestsNumber) {
-        getRequestRelevance(documentsMap, new Set(line.split(" ")));
+        getRelevance(wordsMap, new Set(line.split(" ")));
         requestIndex++;
 
         if (requestIndex !== requestsNumber) {
