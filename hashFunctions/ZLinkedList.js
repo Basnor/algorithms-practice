@@ -65,7 +65,7 @@ class LinkedList {
 }
 
 class HashTable {
-    _tableSize = 10000;
+    _tableSize = 1000000;
 
     constructor() {
         this.table = new Array(this._tableSize).fill().map(() => new LinkedList());
@@ -91,9 +91,9 @@ class HashTable {
         return value ? value : "None";
     }
 
-    #getHash = (str) => {
-        return (str % this._tableSize) + this._tableSize;
-    };
+    #getHash(number) {
+        return (number % this._tableSize) + this._tableSize;
+    }
 }
 
 let linesNumber;
