@@ -72,20 +72,19 @@ class HashTable {
     }
 
     put(key, value) {
-        let i = this.#getHash(key) % this._tableSize;
-
+        const i = this.#getHash(key) % this._tableSize;
         this.table[i].putNode(key, value);
     }
 
     get(key) {
-        let i = this.#getHash(key) % this._tableSize;
+        const i = this.#getHash(key) % this._tableSize;
         const { value } = this.table[i].getNode(key) || {};
 
         return value ? value : "None";
     }
 
     delete(key) {
-        let i = this.#getHash(key) % this._tableSize;
+        const i = this.#getHash(key) % this._tableSize;
         const { value } = this.table[i].deleteNode(key) || {};
 
         return value ? value : "None";

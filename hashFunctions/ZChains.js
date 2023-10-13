@@ -1,7 +1,5 @@
 class HashTable {
-    _tableSize = 1024;
-    _base = 123;
-    _mod = 10003;
+    _tableSize = 1000000;
 
     constructor() {
         this.table = new Array(this._tableSize);
@@ -9,7 +7,7 @@ class HashTable {
     }
 
     put(key, value) {
-        let i = this.#getPolyhash(key) % this._tableSize;
+        let i = this.#getHash(key) % this._tableSize;
 
         while (this.table[i]) {
             if (this.table[i].key === key) {
@@ -17,61 +15,54 @@ class HashTable {
                 return;
             }
 
-            i = this.#getNextStep(i);
+            i = this.#getNext(i);
         }
 
         this.table[i] = { key, value };
     }
 
     get(key) {
-        let i = this.#getPolyhash(key) % this._tableSize;
+        let i = this.#getHash(key) % this._tableSize;
 
         while (this.table[i]?.key !== key) {
             if (!this.table[i]) {
                 return "None";
             }
 
-            i = this.#getNextStep(i);
+            i = this.#getNext(i);
         }
 
         return this.table[i].value;
     }
 
     delete(key) {
-        let i = this.#getPolyhash(key) % this._tableSize;
+        let i = this.#getHash(key) % this._tableSize;
 
         while (this.table[i]?.key !== key) {
             if (!this.table[i]) {
                 return "None";
             }
 
-            i = this.#getNextStep(i);
+            i = this.#getNext(i);
         }
 
         const returnedValue = this.table[i].value;
 
         this.table[i] = "deleted";
-
         this.#cleanDeleted(++this.deletedCount);
 
         return returnedValue;
     }
 
-    #getNextStep = (step) => {
-        return (3 * step + 51 * step * step) % this._tableSize;
-    };
+    #getNext(i) {
+        return (3 * i) % this._tableSize;
+    }
 
-    #getPolyhash = (str) => {
-        let hash = 0;
+    #getHash(number) {
+        return (number % this._tableSize) + this._tableSize;
+    }
 
-        for (const char of str) {
-            hash = (hash * this._base + char.charCodeAt(0)) % this._mod;
-        }
-
-        return hash;
-    };
-
-    #cleanDeleted = (number) => {
+    #cleanDeleted(number) {
         if (number < this._tableSize / 2) {
             return;
         }
@@ -86,7 +77,7 @@ class HashTable {
         }
 
         this.deletedCount = 0;
-    };
+    }
 }
 
 let linesNumber;
@@ -119,5 +110,5 @@ rl.on("line", (line) => {
 });
 
 const parseLine = (line) => {
-    return line.split(" ").map((item, index) => (index < 2 ? item : +item));
+    return line.split(" ").map((item, index) => (index < 1 ? item : +item));
 };
