@@ -78,7 +78,7 @@
 | [H. Странное сравнение](hashFunctions/H.js)                                   | Сравнивает набор символов в строке с помощью мапы                           |
 | [Y. Поисковая система](hashFunctions/Y.js)                                    | [README](hashFunctions/Y.md)                                                |
 | [Z. Хеш-таблица (метод цепочек)](hashFunctions/ZChains.js)                    | [README](hashFunctions/Z.md)                                                |
-| [Z. Хеш-таблица (метод открытой адресации)](hashFunctions/ZOpenAddressing.js) |                                                                             |
+| [Z. Хеш-таблица (метод открытой адресации)](hashFunctions/ZOpenAddressing.js) | Реализации хэш-таблицы со связным списком                                   |
 
 > [_Контест 1_](https://contest.yandex.ru/contest/23991/problems/), [_Контест 2_](https://contest.yandex.ru/contest/24414/problems/)
 
