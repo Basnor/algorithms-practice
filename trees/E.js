@@ -8,14 +8,6 @@ if (process.env.REMOTE_JUDGE !== "true") {
     }
 }
 
-class CNode {
-    constructor(value, left = null, right = null) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
-}
-
 function solution(root) {
     const compare = (node, min, max) => {
         if (node === null) {
@@ -46,5 +38,3 @@ function test() {
     node4.value = 5;
     console.assert(!solution(node5));
 }
-
-test();
