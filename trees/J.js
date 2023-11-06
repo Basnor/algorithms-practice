@@ -1,10 +1,8 @@
-if (process.env.REMOTE_JUDGE !== "true") {
-    class Node {
-        constructor(value, left = null, right = null) {
-            this.value = value;
-            this.left = left;
-            this.right = right;
-        }
+class Node {
+    constructor(value, left = null, right = null) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
     }
 }
 
