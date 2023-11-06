@@ -1,75 +1,88 @@
+class Heap {
+    constructor() {
+        this.heap = [];
+    }
+
+    get length() {
+        return this.heap.length;
+    }
+
+    add(key) {
+        this.heap.push(key);
+
+        this.#siftUp(this.heap.length);
+    }
+
+    popMax() {
+        const result = this.heap[0];
+        this.heap[0] = this.heap[this.heap.length - 1];
+        this.heap.pop();
+
+        this.#siftDown(0);
+
+        return result;
+    }
+
+    #siftUp(index) {
+        if (index === 1) {
+            return;
+        }
+
+        const parentIndex = Math.floor(index / 2);
+        if (compare(this.heap[parentIndex - 1], this.heap[index - 1]) > 0) {
+            [this.heap[parentIndex - 1], this.heap[index - 1]] = [this.heap[index - 1], this.heap[parentIndex - 1]];
+
+            this.#siftUp(parentIndex);
+        }
+    }
+
+    #siftDown(index) {
+        const left = 2 * index + 1;
+        const right = 2 * index + 2;
+
+        if (left >= this.heap.length) {
+            return;
+        }
+
+        let indexLargest = left;
+        if (right < this.heap.length && compare(this.heap[left], this.heap[right]) > 0) {
+            indexLargest = right;
+        }
+
+        if (compare(this.heap[index], this.heap[indexLargest]) > 0) {
+            [this.heap[index], this.heap[indexLargest]] = [this.heap[indexLargest], this.heap[index]];
+            this.#siftDown(indexLargest);
+        }
+    }
+}
+
 const compare = (a, b) => {
-    if (a?.points !== b?.points) {
-        return b?.points - a?.points;
+    if (a.points !== b.points) {
+        return b.points - a.points;
     }
 
-    if (a?.penalty !== b?.penalty) {
-        return a?.penalty - b?.penalty;
+    if (a.penalty !== b.penalty) {
+        return a.penalty - b.penalty;
     }
 
-    return a?.name.localeCompare(b?.name);
+    return a.name.localeCompare(b.name);
 };
 
-function siftDown(heap, index) {
-    const left = 2 * index + 1;
-    const right = 2 * index + 2;
-
-    if (left >= heap.length) {
-        return;
-    }
-
-    let indexLargest = left;
-    if (right < heap.length && compare(heap[left], heap[right]) > 0) {
-        indexLargest = right;
-    }
-
-    if (compare(heap[index], heap[indexLargest]) > 0) {
-        [heap[index], heap[indexLargest]] = [heap[indexLargest], heap[index]];
-        siftDown(heap, indexLargest);
-    }
-}
-
-function popMax(heap) {
-    const result = heap[0];
-    heap[0] = heap[heap.length - 1];
-    heap.pop();
-    siftDown(heap, 0);
-    return result;
-}
-
-function siftUp(heap, index) {
-    if (index === 1) {
-        return;
-    }
-
-    const parentIndex = Math.floor(index / 2);
-    if (compare(heap[parentIndex - 1], heap[index - 1]) > 0) {
-        [heap[parentIndex - 1], heap[index - 1]] = [heap[index - 1], heap[parentIndex - 1]];
-        siftUp(heap, parentIndex);
-    }
-}
-
-function heapAdd(heap, key) {
-    const index = heap.length + 1;
-    heap.push(key);
-    siftUp(heap, index);
-}
-
 const heapSort = (array) => {
-    // Создадим пустую бинарную кучу.
-    let heap = [];
+    let heap = new Heap();
 
-    // Вставим в неё по одному все элементы массива, сохраняя свойства кучи.
     for (let item of array) {
-        heapAdd(heap, item);
+        heap.add(item);
     }
 
     // Будем извлекать из неё наиболее приоритетные элементы, удаляя их из кучи.
-    let sortedArray = [];
+    const sortedArray = [];
+
     while (heap.length > 0) {
-        let max = popMax(heap);
+        const max = heap.popMax();
         sortedArray.push(max);
     }
+
     return sortedArray;
 };
 
