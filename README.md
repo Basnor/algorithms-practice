@@ -105,3 +105,16 @@
 > [_Контест 1_](https://contest.yandex.ru/contest/24809/problems/), [_Контест 2_](https://contest.yandex.ru/contest/24810/problems/)
 
 </details>
+
+### Графы
+
+<details>
+<summary>Список задач</summary>
+
+| Задача                                       | Описание                                          |
+| -------------------------------------------- | ------------------------------------------------- |
+| [A. Построить список смежности](graphs/A.js) | По списку рёбер графа строит его список смежности |
+
+> [_Контест 1_](https://contest.yandex.ru/contest/25069/problems/)
+
+</details>
