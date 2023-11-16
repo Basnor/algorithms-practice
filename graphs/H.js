@@ -4,28 +4,31 @@ const Colors = Object.freeze({
     BLACK: "black",
 });
 
-function mainDFS(edgesMap, startNode, nodesNumber) {
-    const result = [];
+function mainDFS(edgesMap, nodesNumber) {
     const color = new Array(nodesNumber).fill(Colors.WHITE);
+    const entry = new Array(nodesNumber).fill(null);
+    const leave = new Array(nodesNumber).fill(null);
+    let time = -1;
 
     const DFS = (nodeIndex) => {
+        time += 1;
         color[nodeIndex - 1] = Colors.GRAY;
-        result.push(nodeIndex);
+        entry[nodeIndex - 1] = time;
 
-        let outgoingNodes = getOutgoingNodes(nodeIndex, edgesMap);
-
-        for (let node of outgoingNodes) {
+        for (let node of getOutgoingNodes(nodeIndex, edgesMap)) {
             if (color[node - 1] === Colors.WHITE) {
                 DFS(node);
             }
         }
 
+        time += 1;
+        leave[nodeIndex - 1] = time;
         color[nodeIndex - 1] = Colors.BLACK;
     };
 
-    DFS(startNode);
+    DFS(1);
 
-    return result;
+    return entry.map((item, index) => `${item} ${leave[index]}`);
 }
 
 function getOutgoingNodes(nodeIndex, edgesMap) {
@@ -42,29 +45,29 @@ const rl = readline.createInterface({ input: process.stdin });
 rl.on("line", (line) => {
     if (!nodesNumber && !edgesNumber) {
         [nodesNumber, edgesNumber] = line.split(" ").map((item) => +item);
-        return;
+
+        if (edgesNumber) {
+            return;
+        }
     }
 
     if (edgesCounter < edgesNumber) {
         const [node1, node2] = line.split(" ").map((item) => +item);
 
-        const addConnection = (u, v) => {
-            if (!edgesMap.has(u)) {
-                edgesMap.set(u, [v]);
-            } else {
-                edgesMap.get(u).push(v);
-            }
-        };
-
-        addConnection(node1, node2);
-        addConnection(node2, node1);
+        if (!edgesMap.has(node1)) {
+            edgesMap.set(node1, [node2]);
+        } else {
+            edgesMap.get(node1).push(node2);
+        }
 
         edgesCounter++;
-        return;
     }
 
     if (edgesCounter === edgesNumber) {
-        console.log(mainDFS(edgesMap, +line, nodesNumber).join(" "));
+        for (const TimeInAndOut of mainDFS(edgesMap, nodesNumber)) {
+            console.log(TimeInAndOut);
+        }
+
         rl.close();
     }
 });
