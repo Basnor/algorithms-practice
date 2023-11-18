@@ -8,41 +8,30 @@ function topologicalSort(edgesMap, nodesNumber) {
     const color = new Array(nodesNumber).fill(Colors.WHITE);
     const order = [];
 
-    const stack = [1];
-    while (stack.length) {
-        const i = stack.pop();
+    const DFS = (nodeIndex) => {
+        color[nodeIndex - 1] = Colors.GRAY;
 
-        switch (color[i - 1]) {
-            case Colors.WHITE: {
-                color[i - 1] = Colors.GRAY;
-                stack.push(i);
-
-                for (let node of getOutgoingNodes(i, edgesMap)) {
-                    if (color[node - 1] === Colors.WHITE) {
-                        stack.push(node);
-                    }
-                }
-
-                break;
-            }
-
-            case Colors.GRAY: {
-                color[i - 1] = Colors.BLACK;
-                order.push(i);
-                break;
+        for (let node of getOutgoingNodes(nodeIndex, edgesMap)) {
+            if (color[node - 1] === Colors.WHITE) {
+                DFS(node);
             }
         }
 
-        if (!stack.length && color.some((item) => item === Colors.WHITE)) {
-            stack.push(color.indexOf(Colors.WHITE) + 1);
+        color[nodeIndex - 1] = Colors.BLACK;
+        order.push(nodeIndex);
+    };
+
+    for (let i = nodesNumber; i >= 1; i--) {
+        if (color[i - 1] === Colors.WHITE) {
+            DFS(i);
         }
     }
 
-    return order;
+    return order.reverse();
 }
 
 function getOutgoingNodes(nodeIndex, edgesMap) {
-    return edgesMap.get(nodeIndex)?.sort((a, b) => a - b) || [];
+    return edgesMap.get(nodeIndex)?.sort((a, b) => b - a) || [];
 }
 
 const edgesMap = new Map();
