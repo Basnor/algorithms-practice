@@ -5,7 +5,7 @@ const Colors = Object.freeze({
 });
 
 // with recursion
-const mainDFS = (edgesMap, startNode, nodesNumber) => {
+const mainDFS = (connections, startNode, nodesNumber) => {
     const result = [];
     const color = new Array(nodesNumber).fill(Colors.WHITE);
 
@@ -13,7 +13,7 @@ const mainDFS = (edgesMap, startNode, nodesNumber) => {
         color[nodeIndex - 1] = Colors.GRAY;
         result.push(nodeIndex);
 
-        for (let node of getConnectingNodes(nodeIndex, edgesMap)) {
+        for (let node of connections.get(i)) {
             if (color[node - 1] === Colors.WHITE) {
                 DFS(node);
             }
@@ -28,7 +28,7 @@ const mainDFS = (edgesMap, startNode, nodesNumber) => {
 };
 
 // without recursion
-const DFS = (edgesMap, startNode, nodesNumber) => {
+const DFS = (connections, startNode, nodesNumber) => {
     const result = [];
     const color = new Array(nodesNumber).fill(Colors.WHITE);
 
@@ -42,7 +42,7 @@ const DFS = (edgesMap, startNode, nodesNumber) => {
                 result.push(i);
                 stack.push(i);
 
-                for (let node of getConnectingNodes(i, edgesMap)) {
+                for (let node of connections.get(i)) {
                     if (color[node - 1] === Colors.WHITE) {
                         stack.push(node);
                     }
@@ -59,11 +59,25 @@ const DFS = (edgesMap, startNode, nodesNumber) => {
     return result;
 };
 
-const getConnectingNodes = (nodeIndex, edgesMap) => {
-    return edgesMap.get(nodeIndex)?.sort((a, b) => b - a) || [];
-};
+class Connections {
+    constructor() {
+        this.connections = new Map();
+    }
 
-const edgesMap = new Map();
+    add(key, value) {
+        if (!this.connections.has(key)) {
+            this.connections.set(key, [value]);
+        } else {
+            this.connections.get(key).push(value);
+        }
+    }
+
+    get(index) {
+        return this.connections.get(index)?.sort((a, b) => b - a) || [];
+    }
+}
+
+const connections = new Connections();
 let nodesNumber,
     edgesNumber,
     edgesCounter = 0;
@@ -80,23 +94,15 @@ rl.on("line", (line) => {
         const [node1, node2] = line.split(" ").map((item) => +item);
 
         // Граф неориентированный
-        addConnection(node1, node2);
-        addConnection(node2, node1);
+        connections.add(node1, node2);
+        connections.add(node2, node1);
 
         edgesCounter++;
         return;
     }
 
     if (edgesCounter === edgesNumber) {
-        console.log(DFS(edgesMap, +line, nodesNumber).join(" "));
+        console.log(DFS(connections, +line, nodesNumber).join(" "));
         rl.close();
     }
 });
-
-const addConnection = (u, v) => {
-    if (!edgesMap.has(u)) {
-        edgesMap.set(u, [v]);
-    } else {
-        edgesMap.get(u).push(v);
-    }
-};

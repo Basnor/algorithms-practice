@@ -4,25 +4,24 @@ const Colors = Object.freeze({
     BLACK: "black",
 });
 
-function mainDFS(edgesMap, nodesNumber) {
+// with recursion
+function mainDFS(connections, nodesNumber) {
     const color = new Array(nodesNumber).fill(Colors.WHITE);
     const entry = new Array(nodesNumber).fill(null);
     const leave = new Array(nodesNumber).fill(null);
     let time = -1;
 
     const DFS = (nodeIndex) => {
-        time += 1;
         color[nodeIndex - 1] = Colors.GRAY;
-        entry[nodeIndex - 1] = time;
+        entry[nodeIndex - 1] = ++time;
 
-        for (let node of getOutgoingNodes(nodeIndex, edgesMap)) {
+        for (let node of connections.get(nodeIndex)) {
             if (color[node - 1] === Colors.WHITE) {
                 DFS(node);
             }
         }
 
-        time += 1;
-        leave[nodeIndex - 1] = time;
+        leave[nodeIndex - 1] = ++time;
         color[nodeIndex - 1] = Colors.BLACK;
     };
 
@@ -31,11 +30,63 @@ function mainDFS(edgesMap, nodesNumber) {
     return entry.map((item, index) => `${item} ${leave[index]}`);
 }
 
-function getOutgoingNodes(nodeIndex, edgesMap) {
-    return edgesMap.get(nodeIndex)?.sort((a, b) => a - b) || [];
+// without recursion
+const DFS = (connections, nodesNumber) => {
+    const color = new Array(nodesNumber).fill(Colors.WHITE);
+    const entry = new Array(nodesNumber).fill(null);
+    const leave = new Array(nodesNumber).fill(null);
+    let time = -1;
+
+    const stack = [1];
+    while (stack.length) {
+        const i = stack.pop();
+
+        switch (color[i - 1]) {
+            case Colors.WHITE:
+                time += 1;
+                color[i - 1] = Colors.GRAY;
+                entry[i - 1] = time;
+                stack.push(i);
+
+                for (let node of connections.get(i)) {
+                    if (color[node - 1] === Colors.WHITE) {
+                        stack.push(node);
+                    }
+                }
+
+                break;
+
+            case Colors.GRAY:
+                time += 1;
+                leave[i - 1] = time;
+                color[i - 1] = Colors.BLACK;
+
+                break;
+        }
+    }
+
+    return entry.map((item, index) => `${item} ${leave[index]}`);
+};
+
+class Connections {
+    constructor() {
+        this.connections = new Map();
+    }
+
+    add(key, value) {
+        if (!this.connections.has(key)) {
+            this.connections.set(key, [value]);
+        } else {
+            this.connections.get(key).push(value);
+        }
+    }
+
+    get(index) {
+        return this.connections.get(index)?.sort((a, b) => b - a) || [];
+    }
 }
 
-const edgesMap = new Map();
+const connections = new Connections();
 let nodesNumber,
     edgesNumber,
     edgesCounter = 0;
@@ -54,18 +105,14 @@ rl.on("line", (line) => {
     if (edgesCounter < edgesNumber) {
         const [node1, node2] = line.split(" ").map((item) => +item);
 
-        if (!edgesMap.has(node1)) {
-            edgesMap.set(node1, [node2]);
-        } else {
-            edgesMap.get(node1).push(node2);
-        }
+        connections.add(node1, node2);
 
         edgesCounter++;
     }
 
     if (edgesCounter === edgesNumber) {
-        for (const TimeInAndOut of mainDFS(edgesMap, nodesNumber)) {
-            console.log(TimeInAndOut);
+        for (const timeInAndOut of DFS(connections, nodesNumber)) {
+            console.log(timeInAndOut);
         }
 
         rl.close();
