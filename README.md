@@ -62,6 +62,8 @@
 | [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)      | [README](recursionAndSorting/Y.md)                                    |
 | [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js) | [README](recursionAndSorting/Z.md)                                    |
 
+> [_Контест 1_](https://contest.yandex.ru/contest/23638/problems/), [_Контест 2_](https://contest.yandex.ru/contest/23815/problems/)
+
 </details>
 
 ### Хэш-функции
