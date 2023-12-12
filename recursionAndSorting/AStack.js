@@ -31,7 +31,7 @@ isCorrectBracketSeq = (brackets) => {
 };
 
 const generateBrackets = (n, prefix) => {
-    if (n == 0) {
+    if (n === 0) {
         if (isCorrectBracketSeq(prefix)) {
             console.log(prefix);
         }
