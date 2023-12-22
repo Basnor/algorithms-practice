@@ -21,37 +21,43 @@ class Graph {
     }
 
     findMaxST() {
-        let maxSTWeight = 0;
+        let weight = 0;
 
         // Берём первую попавшуюся вершину.
-        this.#addVertex(1);
+        this.#addVertex(this.vertices[0]);
 
         while (this.notAdded.size && this.edges.size) {
-            const edge = this.#extractMaximum(this.edges);
+            const edge = this.#extractMaximum();
 
             if (this.notAdded.has(edge.end)) {
-                maxSTWeight += edge.weight;
+                weight += edge.weight;
 
                 this.#addVertex(edge.end);
             }
+
+            if (this.notAdded.has(edge.start)) {
+                weight += edge.weight;
+
+                this.#addVertex(edge.start);
+            }
         }
 
-        return maxSTWeight;
+        return this.notAdded.size > 0 ? null : weight;
     }
 
-    #extractMaximum(edges) {
+    #extractMaximum() {
         // Извлекает максимальное ребро из массива рёбер
         // и больше данного ребра в массива не будет
-        let it = edges.values();
+        let it = this.edges.values();
         let max = it.next().value;
 
-        for (const edge of edges) {
+        for (const edge of this.edges) {
             if (edge.weight > max.weight) {
                 max = edge;
             }
         }
 
-        edges.delete(max);
+        this.edges.delete(max);
 
         return max;
     }
@@ -59,6 +65,10 @@ class Graph {
     #addVertex(vertex) {
         this.added.add(vertex);
         this.notAdded.delete(vertex);
+
+        if (!this.adjacencyList.size) {
+            return;
+        }
 
         for (const edge of this.adjacencyList.get(vertex)) {
             if (this.notAdded.has(edge.start) || this.notAdded.has(edge.end)) {
@@ -93,8 +103,9 @@ rl.on("line", (line) => {
 
     if (edgesCounter === edgesNumber) {
         const graph = new Graph(vertices, edgesNumber);
-        console.log(graph.findMaxST());
+        const maxST = graph.findMaxST();
 
+        console.log(maxST === null ? "Oops! I did it again" : maxST);
         rl.close();
     }
 });
