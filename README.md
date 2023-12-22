@@ -47,20 +47,20 @@
 <details>
 <summary>Список задач</summary>
 
-| Задача                                                        | Описание                                                              |
-| ------------------------------------------------------------- | --------------------------------------------------------------------- |
-| [A. Генератор скобок](recursionAndSorting/ABacktracking.js)   | Генерация скобочных последовательностей с помощью бектрекинга         |
-| [A. Генератор скобок](recursionAndSorting/AStack.js)          | Генерация всех скобочных последовательностей, фильтрация неправильных |
-| [B. Комбинации](recursionAndSorting/B.js)                     |                                                                       |
-| [C. Подпоследовательность](recursionAndSorting/C.js)          |                                                                       |
-| [H. Большое число](recursionAndSorting/H.js)                  |                                                                       |
-| [J. Пузырёк](recursionAndSorting/J.js)                        |                                                                       |
-| [K. Сортировка слиянием](recursionAndSorting/J.js)            |                                                                       |
-| [L. Два велосипеда](recursionAndSorting/L.js)                 |                                                                       |
-| [N. Клумбы](recursionAndSorting/N.js)                         |                                                                       |
-| ...                                                           |                                                                       |
-| [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)      | [README](recursionAndSorting/Y.md)                                    |
-| [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js) | [README](recursionAndSorting/Z.md)                                    |
+| Задача                                                                   | Описание                                     |
+| ------------------------------------------------------------------------ | -------------------------------------------- |
+| [A. Генератор скобок (бектрекинг)](recursionAndSorting/ABacktracking.js) | Генерация скобочных последовательностей      |
+| [A. Генератор скобок (фильтрация ПСП)](recursionAndSorting/AStack.js)    | Генерация всех скобочных последовательностей |
+| [B. Комбинации](recursionAndSorting/B.js)                                |                                              |
+| [C. Подпоследовательность](recursionAndSorting/C.js)                     |                                              |
+| [H. Большое число](recursionAndSorting/H.js)                             |                                              |
+| [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
+| [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
+| [L. Два велосипеда](recursionAndSorting/L.js)                            |                                              |
+| [N. Клумбы](recursionAndSorting/N.js)                                    |                                              |
+| ...                                                                      |                                              |
+| [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)                 | [README](recursionAndSorting/Y.md)           |
+| [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js)            | [README](recursionAndSorting/Z.md)           |
 
 > [_Контест 1_](https://contest.yandex.ru/contest/23638/problems/), [_Контест 2_](https://contest.yandex.ru/contest/23815/problems/)
 
