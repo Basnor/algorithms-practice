@@ -102,10 +102,11 @@ rl.on("line", (line) => {
     }
 
     if (edgesCounter === edgesNumber) {
-        const graph = new Graph(vertices, edgesNumber);
+        const graph = new Graph(vertices, verticesNumber);
         const maxST = graph.findMaxST();
 
         console.log(maxST === null ? "Oops! I did it again" : maxST);
+
         rl.close();
     }
 });
