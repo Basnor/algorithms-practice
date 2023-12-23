@@ -30,7 +30,7 @@ class PriorityQueue {
 
         const parentIndex = Math.floor((index - 1) / 2);
 
-        if (this.heap[index][0] >= this.heap[parentIndex][0]) {
+        if (compare(this.heap[parentIndex][0], this.heap[index][0]) > 0) {
             [this.heap[parentIndex], this.heap[index]] = [this.heap[index], this.heap[parentIndex]];
 
             this.#siftUp(parentIndex);
@@ -46,11 +46,11 @@ class PriorityQueue {
         }
 
         let indexLargest = left;
-        if (this.heap.length > right && this.heap[left] < this.heap[right]) {
+        if (right < this.heap.length && compare(this.heap[left][0], this.heap[right][0]) > 0) {
             indexLargest = right;
         }
 
-        if (this.heap[indexLargest][0] >= this.heap[index][0]) {
+        if (compare(this.heap[index][0], this.heap[indexLargest][0]) > 0) {
             [this.heap[index], this.heap[indexLargest]] = [this.heap[indexLargest], this.heap[index]];
 
             this.#siftDown(indexLargest);
@@ -58,24 +58,25 @@ class PriorityQueue {
     }
 }
 
-spanningTree = (V, E, edges) => {
+const compare = (a, b) => b - a;
+
+const spanningTree = (V, E, edges) => {
     // Create an adjacency list representation of the graph
     const adj = new Array(V).fill(null).map(() => []);
 
-    // Fill the adjacency list with edges and their weights
     for (let i = 0; i < E; i++) {
         const [u, v, wt] = edges[i];
+
         adj[u].push([v, wt]);
         adj[v].push([u, wt]);
     }
 
-    // Create a priority queue to store edges with their weights
     const pq = new PriorityQueue();
 
     // Create a visited array to keep track of visited vertices
     const visited = new Array(V).fill(false);
 
-    // Variable to store the result (sum of edge weights)
+    // Max sum of edge weights
     let max = 0;
 
     // Start with vertex 0
@@ -85,15 +86,15 @@ spanningTree = (V, E, edges) => {
     while (!pq.isEmpty) {
         const p = pq.dequeue();
 
-        const wt = p[0]; // Weight of the edge
-        const u = p[1]; // Vertex connected to the edge
+        const wt = p[0];
+        const u = p[1];
 
         if (visited[u]) {
-            continue; // Skip if the vertex is already visited
+            continue;
         }
 
-        max += wt; // Add the edge weight to the result
-        visited[u] = true; // Mark the vertex as visited
+        max += wt;
+        visited[u] = true;
 
         // Explore the adjacent vertices
         for (const v of adj[u]) {
@@ -104,7 +105,7 @@ spanningTree = (V, E, edges) => {
         }
     }
 
-    return visited.some((item) => item === false) ? null : max; // Return the sum of edge weights of the Maximum Spanning Tree
+    return visited.some((item) => item === false) ? null : max;
 };
 
 const graph = [];
