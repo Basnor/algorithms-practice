@@ -30,7 +30,7 @@ class PriorityQueue {
 
         const parentIndex = Math.floor((index - 1) / 2);
 
-        if (this.heap[parentIndex][0] < this.heap[index][0]) {
+        if (this.heap[index][0] >= this.heap[parentIndex][0]) {
             [this.heap[parentIndex], this.heap[index]] = [this.heap[index], this.heap[parentIndex]];
 
             this.#siftUp(parentIndex);
@@ -39,18 +39,18 @@ class PriorityQueue {
 
     #siftDown(index) {
         const left = 2 * index + 1;
-        const right = 2 * index + 2;
+        const right = left + 1;
 
         if (left >= this.heap.length) {
             return;
         }
 
         let indexLargest = left;
-        if (right < this.heap.length && compare(this.heap[left], this.heap[right]) > 0) {
+        if (this.heap.length > right && this.heap[left] < this.heap[right]) {
             indexLargest = right;
         }
 
-        if (this.heap[index][0] < this.heap[indexLargest][0]) {
+        if (this.heap[indexLargest][0] >= this.heap[index][0]) {
             [this.heap[index], this.heap[indexLargest]] = [this.heap[indexLargest], this.heap[index]];
 
             this.#siftDown(indexLargest);
@@ -112,7 +112,11 @@ let verticesNumber,
     edgesNumber,
     edgesCounter = 0;
 const readline = require("readline");
-const rl = readline.createInterface({ input: process.stdin });
+const fs = require("fs");
+const path = require("path");
+const rl = readline.createInterface({
+    input: fs.createReadStream(path.join(__dirname, "input.txt")),
+});
 
 rl.on("line", (line) => {
     if (!verticesNumber && !edgesNumber) {
