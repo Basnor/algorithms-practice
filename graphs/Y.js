@@ -58,6 +58,13 @@ class PriorityQueue {
     }
 }
 
+class Exception extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "";
+    }
+}
+
 const compare = (a, b) => b - a;
 
 const spanningTree = (V, E, edges) => {
@@ -105,7 +112,11 @@ const spanningTree = (V, E, edges) => {
         }
     }
 
-    return visited.some((item) => item === false) ? null : max;
+    if (visited.some((item) => item === false)) {
+        throw new Exception("Oops! I did it again");
+    }
+
+    return max;
 };
 
 const graph = [];
@@ -142,9 +153,11 @@ rl.on("line", (line) => {
     }
 
     if (edgesCounter === edgesNumber) {
-        const maxST = spanningTree(verticesNumber, edgesNumber, graph);
-
-        console.log(maxST === null ? "Oops! I did it again" : maxST);
+        try {
+            console.log(spanningTree(verticesNumber, edgesNumber, graph));
+        } catch (e) {
+            console.log(e.message);
+        }
 
         rl.close();
     }
