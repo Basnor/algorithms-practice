@@ -66,6 +66,10 @@ rl.on("line", (line) => {
         verticesNumber = +line;
         graph = new Graph(verticesNumber);
 
+        if (verticesNumber === 1) {
+            console.log("YES");
+        }
+
         return;
     }
 
