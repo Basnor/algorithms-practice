@@ -16,7 +16,7 @@ class Graph {
     isCyclic() {
         const inDegree = new Array(this.V).fill(0); // stores in-degree of each vertex
         const q = []; // queue to store vertices with 0 in-degree
-        let visited = 0; // count of visited vertices
+        let visited = 0;
 
         // calculate in-degree of each vertex
         for (let u = 0; u < this.V; u++) {
@@ -47,7 +47,7 @@ class Graph {
             }
         }
 
-        return visited !== this.V; // if not all vertices are visited, there is a cycle
+        return visited !== this.V;
     }
 }
 
