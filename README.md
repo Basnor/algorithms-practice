@@ -122,7 +122,9 @@
 | [E. Компоненты связности](graphs/E.js)                       | Находит компоненты связности неориентированного графа                                                |
 | [H. Время выходить](graphs/H.js)                             | Находит время входа и выхода при обходе в глубину ориентированного графа                             |
 | [J. Топологическая сортировка](graphs/J.js)                  | Находит топологическую сортировку ациклического ориентированного графа (DAG, directed acyclic graph) |
+| [Y. Дорогая сеть](graphs/Y.js)                               | [README](graphs/Y.md)                                                                                |
+| [Z. Железные дороги](graphs/Z.js)                            | [README](graphs/Z.md)                                                                                |
 
-> [_Контест 1_](https://contest.yandex.ru/contest/25069/problems/)
+> [_Контест 1_](https://contest.yandex.ru/contest/25069/problems/), [_Контест 2_](https://contest.yandex.ru/contest/25070/problems/)
 
 </details>
