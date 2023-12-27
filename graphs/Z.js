@@ -6,7 +6,7 @@ class Graph {
 
     addEdge(v, u, wt) {
         if (wt === "R") {
-            // Перевернем ребро с весом R
+            // Reverse edge with weight R
             this.adj[u].push(v);
         } else {
             this.adj[v].push(u);
@@ -14,35 +14,32 @@ class Graph {
     }
 
     isCyclic() {
-        const inDegree = new Array(this.V).fill(0); // stores in-degree of each vertex
-        const q = []; // queue to store vertices with 0 in-degree
+        const inDegree = new Array(this.V).fill(0);
+        const zeroInDegree = [];
         let visited = 0;
 
-        // calculate in-degree of each vertex
         for (let u = 0; u < this.V; u++) {
             for (let v of this.adj[u]) {
                 inDegree[v]++;
             }
         }
 
-        // enqueue vertices with 0 in-degree
         for (let u = 0; u < this.V; u++) {
             if (inDegree[u] === 0) {
-                q.push(u);
+                zeroInDegree.push(u);
             }
         }
 
         // BFS traversal
-        while (q.length > 0) {
-            const u = q.shift();
+        while (zeroInDegree.length > 0) {
+            const u = zeroInDegree.shift();
             visited++;
 
-            // reduce in-degree of adjacent vertices
             for (let v of this.adj[u]) {
                 inDegree[v]--;
-                // if in-degree becomes 0, enqueue the vertex
+
                 if (inDegree[v] === 0) {
-                    q.push(v);
+                    zeroInDegree.push(v);
                 }
             }
         }
