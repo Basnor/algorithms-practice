@@ -128,3 +128,16 @@
 > [_Контест 1_](https://contest.yandex.ru/contest/25069/problems/), [_Контест 2_](https://contest.yandex.ru/contest/25070/problems/)
 
 </details>
+
+### Жадные алгоритмы
+
+<details>
+<summary>Список задач</summary>
+
+| Задача                            | Описание                   |
+| --------------------------------- | -------------------------- |
+| [A. Биржа](greedyAlgorithms/A.js) | Считает максимальную сумму |
+
+> [_Контест 1_](https://contest.yandex.ru/contest/25596/problems/)
+
+</details>
