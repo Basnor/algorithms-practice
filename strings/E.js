@@ -1,4 +1,4 @@
-function insert(string, itemsToInsert) {
+const insert = (string, itemsToInsert) => {
     itemsToInsert.sort((a, b) => {
         return b.index - a.index;
     });
@@ -19,7 +19,7 @@ function insert(string, itemsToInsert) {
     }
 
     return string;
-}
+};
 
 const substrings = [];
 let lineCounter = 0,
