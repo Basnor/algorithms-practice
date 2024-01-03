@@ -150,3 +150,17 @@
 > [_Контест 1_](https://contest.yandex.ru/contest/25596/problems/), [_Контест 2_](https://contest.yandex.ru/contest/25597/problems/)
 
 </details>
+
+### Алгоритмы на строках
+
+<details>
+<summary>Список задач</summary>
+
+| Задача                             | Описание                     |
+| ---------------------------------- | ---------------------------- |
+| [A. Разворот строки](strings/A.js) | Переворачивает порядок слов  |
+| [E. Вставка строк](strings/E.js)   | Вставляет подстроки в строку |
+
+> [_Контест 1_](https://contest.yandex.ru/contest/26131/problems/)
+
+</details>
