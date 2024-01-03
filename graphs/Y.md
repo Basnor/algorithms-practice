@@ -28,8 +28,6 @@ https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
 
 ## ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ
 
-O(V^2) where V is the number of vertex
-
 Пространственная сложность составляет O(V^2), где V - количество вершин. Так как нам нужно держать в памяти:
 
 -   матрицу смежности размера V;
