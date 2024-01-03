@@ -144,7 +144,9 @@
 | [K. Гороскопы](greedyAlgorithms/K.js)                       | Находит наибольшую общую подпоследовательность                            |
 | [L. Золото лепреконов](greedyAlgorithms/LOneDimensional.js) | Решает задачу о рюкзаке методом динамического программирования            |
 | [L. Золото лепреконов](greedyAlgorithms/LTwoDimensional.js) | Решает задачу о рюкзаке методом двумерного динамического программирования |
+| [Y. Расстояние по Левенштейну](greedyAlgorithms/Y.js)       | [README](greedyAlgorithms/Y.md)                                           |
+| [Z. Одинаковые суммы](greedyAlgorithms/Z.js)                | [README](greedyAlgorithms/Z.md)                                           |
 
-> [_Контест 1_](https://contest.yandex.ru/contest/25596/problems/)
+> [_Контест 1_](https://contest.yandex.ru/contest/25596/problems/), [_Контест 2_](https://contest.yandex.ru/contest/25597/problems/)
 
 </details>
