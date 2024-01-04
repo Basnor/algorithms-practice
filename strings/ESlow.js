@@ -1,4 +1,4 @@
-const insert = (string, itemsToInsert) => {
+const printInsert = (string, itemsToInsert) => {
     itemsToInsert.sort((a, b) => {
         return b.index - a.index;
     });
@@ -10,10 +10,12 @@ const insert = (string, itemsToInsert) => {
         string = string.padEnd(string.length + shift);
 
         for (let i = string.length - shift - 1; i >= indexToInsert; i--) {
+            console.log("1: ", string.substring(0, i + shift), "2: ", string.charAt(i), "3: ", string.substring(i + shift + 1));
             string = string.substring(0, i + shift) + string.charAt(i) + string.substring(i + shift + 1);
         }
 
         for (let i = 0; i < shift; i++) {
+            console.log("1: ", string.substring(0, indexToInsert + i), "2: ", stringToInsert.charAt(i), "3: ", string.substring(indexToInsert + i + 1));
             string = string.substring(0, indexToInsert + i) + stringToInsert.charAt(i) + string.substring(indexToInsert + i + 1);
         }
     }
@@ -52,7 +54,7 @@ rl.on("line", (line) => {
     }
 
     if (lineCounter - 2 === substringsNumber) {
-        console.log(insert(string, substrings));
+        printInsert(string, substrings);
         rl.close();
     }
 });
