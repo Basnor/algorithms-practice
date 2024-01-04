@@ -7,12 +7,8 @@ const printInsertResult = (text, itemsToInsert) => {
     for (const itemToInsert of itemsToInsert) {
         const { substring: stringToInsert, index: indexToInsert } = itemToInsert;
 
-        if (indexToInsert === i) {
-            process.stdout.write(stringToInsert);
-        } else {
-            process.stdout.write(text.substring(i, indexToInsert) + stringToInsert);
-            i = indexToInsert;
-        }
+        process.stdout.write(text.slice(i, indexToInsert).concat(stringToInsert));
+        i = indexToInsert;
     }
 
     process.stdout.write(text.substring(i, text.length));
