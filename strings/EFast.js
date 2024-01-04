@@ -1,23 +1,25 @@
-const printInsertResult = (text, itemsToInsert) => {
+const insert = (text, itemsToInsert) => {
+    let result = "";
+    let prevIndex = 0;
+
     itemsToInsert.sort((a, b) => {
         return a.index - b.index;
     });
 
-    let i = 0;
     for (const itemToInsert of itemsToInsert) {
-        const { substring: stringToInsert, index: indexToInsert } = itemToInsert;
+        const { substring, index } = itemToInsert;
 
-        process.stdout.write(text.slice(i, indexToInsert).concat(stringToInsert));
-        i = indexToInsert;
+        result += text.substring(prevIndex, index) + substring;
+        prevIndex = index;
     }
 
-    process.stdout.write(text.substring(i, text.length));
+    return result + text.substring(prevIndex);
 };
 
-const substrings = [];
+const itemsToInsert = [];
 let lineCounter = 0,
     substringsNumber,
-    string;
+    text;
 const readline = require("readline");
 const fs = require("fs");
 const path = require("path");
@@ -27,7 +29,7 @@ const rl = readline.createInterface({
 
 rl.on("line", (line) => {
     if (lineCounter === 0) {
-        string = line;
+        text = line;
         lineCounter++;
         return;
     }
@@ -39,13 +41,13 @@ rl.on("line", (line) => {
     }
 
     if (lineCounter - 2 < substringsNumber) {
-        const [stringToInsert, indexToInsert] = line.split(" ");
-        substrings.push({ substring: stringToInsert, index: +indexToInsert });
+        const [substring, index] = line.split(" ");
+        itemsToInsert.push({ substring, index: +index });
         lineCounter++;
     }
 
     if (lineCounter - 2 === substringsNumber) {
-        printInsertResult(string, substrings);
+        process.stdout.write(insert(text, itemsToInsert));
         rl.close();
     }
 });
