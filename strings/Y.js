@@ -22,7 +22,9 @@ const unpack = (text) => {
             text = text.substring(0, index) + pattern.repeat(multiplier) + text.substring(index + i + 3);
         }
 
-        i++;
+        if (!indexes.length) {
+            i++;
+        }
     }
 
     return text;
