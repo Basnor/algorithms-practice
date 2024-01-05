@@ -33,10 +33,12 @@ const unpack = (text) => {
 };
 
 const findPrefix = (strings) => {
-    let prefix = unpack(strings.pop());
+    let prefix = unpack(strings[0]);
 
-    for (const string of strings) {
-        while (prefix && unpack(string).slice(0, prefix.length) !== prefix) {
+    for (let i = 1; i < strings.length; i++) {
+        const string = unpack(strings[i]);
+
+        while (prefix && string.slice(0, prefix.length) !== prefix) {
             prefix = prefix.slice(0, -1);
         }
     }
