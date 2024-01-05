@@ -1,13 +1,19 @@
 const findPattern = (text) => {
     let openIndex = 0;
+    let pattern = "";
 
     for (let i = 0; i < text.length; i++) {
-        if (text.charAt(i) === "[") {
-            openIndex = i;
+        if (text[i] === "]") {
+            return [pattern.repeat(+text[openIndex - 1]), openIndex - 1, i + 1];
         }
 
-        if (text.charAt(i) === "]") {
-            return [openIndex - 1, i];
+        if (openIndex > 0) {
+            pattern += text[i];
+        }
+
+        if (text[i] === "[") {
+            openIndex = i;
+            pattern = "";
         }
     }
 
@@ -15,27 +21,22 @@ const findPattern = (text) => {
 };
 
 const unpack = (text) => {
-    let [start, end] = findPattern(text);
+    let [pattern, start, end] = findPattern(text);
 
-    while (start || end) {
-        const multiplier = +text[start];
-        const pattern = text.substring(start + 2, end);
+    while (pattern) {
+        text = text.substring(0, start) + pattern + text.substring(end);
 
-        text = text.substring(0, start) + pattern.repeat(multiplier) + text.substring(end + 1);
-
-        [start, end] = findPattern(text);
+        [pattern, start, end] = findPattern(text);
     }
 
     return text;
 };
 
 const findPrefix = (strings) => {
-    let prefix = unpack(strings[0]);
+    let prefix = unpack(strings.pop());
 
-    for (let i = 1; i < strings.length; i++) {
-        const string = unpack(strings[i]);
-
-        while (prefix && string.slice(0, prefix.length) !== prefix) {
+    for (const string of strings) {
+        while (prefix && unpack(string).slice(0, prefix.length) !== prefix) {
             prefix = prefix.slice(0, -1);
         }
     }
