@@ -1,30 +1,29 @@
-const findPattern = (text, length) => {
-    const regex = new RegExp(`(\\d)\\[(\\w){${length}}\\]`, "g");
-    const occurrences = [];
+const findPattern = (text) => {
+    let openIndex = 0;
 
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-        occurrences.push(match.index);
+    for (let i = 0; i < text.length; i++) {
+        if (text.charAt(i) === "[") {
+            openIndex = i;
+        }
+
+        if (text.charAt(i) === "]") {
+            return [openIndex - 1, i];
+        }
     }
 
-    return occurrences;
+    return [];
 };
 
 const unpack = (text) => {
-    let i = 1;
-    while (i !== text.length) {
-        const indexes = findPattern(text, i).sort((a, b) => b - a);
+    let [start, end] = findPattern(text);
 
-        for (const index of indexes) {
-            const multiplier = +text[index];
-            const pattern = text.substring(index + 2, index + i + 2);
+    while (start || end) {
+        const multiplier = +text[start];
+        const pattern = text.substring(start + 2, end);
 
-            text = text.substring(0, index) + pattern.repeat(multiplier) + text.substring(index + i + 3);
-        }
+        text = text.substring(0, start) + pattern.repeat(multiplier) + text.substring(end + 1);
 
-        if (!indexes.length) {
-            i++;
-        }
+        [start, end] = findPattern(text);
     }
 
     return text;
