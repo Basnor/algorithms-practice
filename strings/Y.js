@@ -1,32 +1,37 @@
 const findPattern = (text) => {
-    let openIndex = 0;
-    let pattern = "";
+    const regex = new RegExp(`(?<multiplier>\\d)\\[(?<symbols>\\w+)\\]`, "g");
+    const matches = text.matchAll(regex);
+    const result = [];
 
-    for (let i = 0; i < text.length; i++) {
-        if (text[i] === "]") {
-            return [pattern.repeat(+text[openIndex - 1]), openIndex - 1, i + 1];
-        }
+    for (const match of matches) {
+        let { multiplier, symbols } = match.groups;
 
-        if (openIndex > 0) {
-            pattern += text[i];
-        }
+        const pattern = symbols.repeat(multiplier);
+        const start = match.index;
+        const end = match.index + match[0].length;
 
-        if (text[i] === "[") {
-            openIndex = i;
-            pattern = "";
-        }
+        result.push([pattern, start, end]);
     }
 
-    return [];
+    return result;
 };
 
 const unpack = (text) => {
-    let [pattern, start, end] = findPattern(text);
+    let patterns = findPattern(text);
+    let pointer = 0;
 
-    while (pattern) {
-        text = text.substring(0, start) + pattern + text.substring(end);
+    while (patterns.length) {
+        let unpacked = text.substring(pointer, patterns[0][1]);
+        pointer = unpacked.length;
 
-        [pattern, start, end] = findPattern(text);
+        for (const [pattern, start, end] of patterns) {
+            unpacked += text.substring(pointer, start) + pattern;
+            pointer = end;
+        }
+
+        unpacked += text.substring(pointer);
+        patterns = findPattern((text = unpacked));
+        pointer = 0;
     }
 
     return text;
