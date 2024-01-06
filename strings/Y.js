@@ -1,10 +1,11 @@
-const findPattern = (text) => {
-    const regex = new RegExp(`(?<multiplier>\\d)\\[(?<symbols>\\w+)\\]`, "g");
+const regex = new RegExp(`(?<multiplier>\\d)\\[(?<symbols>\\w+)\\]`, "g");
+
+const findPatterns = (text) => {
     const matches = text.matchAll(regex);
     const result = [];
 
     for (const match of matches) {
-        let { multiplier, symbols } = match.groups;
+        const { multiplier, symbols } = match.groups;
 
         const pattern = symbols.repeat(multiplier);
         const start = match.index;
@@ -17,21 +18,19 @@ const findPattern = (text) => {
 };
 
 const unpack = (text) => {
-    let patterns = findPattern(text);
-    let pointer = 0;
+    let patterns = findPatterns(text);
 
     while (patterns.length) {
-        let unpacked = text.substring(pointer, patterns[0][1]);
-        pointer = unpacked.length;
+        let unpacked = text.substring(0, patterns[0][1]);
+        let i = unpacked.length;
 
         for (const [pattern, start, end] of patterns) {
-            unpacked += text.substring(pointer, start) + pattern;
-            pointer = end;
+            unpacked += text.substring(i, start) + pattern;
+            i = end;
         }
 
-        unpacked += text.substring(pointer);
-        patterns = findPattern((text = unpacked));
-        pointer = 0;
+        unpacked += text.substring(i);
+        patterns = findPatterns((text = unpacked));
     }
 
     return text;
