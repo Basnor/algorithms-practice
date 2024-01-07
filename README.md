@@ -79,6 +79,7 @@
 | [D. Кружки](hashFunctions/D.js)                                               |                                                                             |
 | [G. Соревнование](hashFunctions/G.js)                                         | Создает мапу из одинаковых сумм, затем вычисляет максимальную дистанцию     |
 | [H. Странное сравнение](hashFunctions/H.js)                                   | Сравнивает набор символов в строке с помощью мапы                           |
+| ...                                                                           |                                                                             |
 | [Y. Поисковая система](hashFunctions/Y.js)                                    | [README](hashFunctions/Y.md)                                                |
 | [Z. Хеш-таблица (метод цепочек)](hashFunctions/ZChains.js)                    | [README](hashFunctions/Z.md)                                                |
 | [Z. Хеш-таблица (метод открытой адресации)](hashFunctions/ZOpenAddressing.js) |                                                                             |
@@ -102,6 +103,7 @@
 | [K. Выведи диапазон](trees/K.js)          | Центрированный LMR обход дерева                                                                                                          |
 | [L. Просеивание вниз](trees/L.js)         | Совершает просеивание вниз в куче на максимум                                                                                            |
 | [M. Просеивание вверх](trees/M.js)        | Совершает просеивание вверх в куче на максимум                                                                                           |
+| ...                                       |                                                                                                                                          |
 | [Y. Пирамидальная сортировка](trees/Y.js) | [README](trees/Y.md)                                                                                                                     |
 | [Z. Удали узел](trees/Z.js)               | [README](trees/Z.md)                                                                                                                     |
 
@@ -122,6 +124,7 @@
 | [E. Компоненты связности](graphs/E.js)                       | Находит компоненты связности неориентированного графа                                                |
 | [H. Время выходить](graphs/H.js)                             | Находит время входа и выхода при обходе в глубину ориентированного графа                             |
 | [J. Топологическая сортировка](graphs/J.js)                  | Находит топологическую сортировку ациклического ориентированного графа (DAG, directed acyclic graph) |
+| ...                                                          |                                                                                                      |
 | [Y. Дорогая сеть](graphs/Y.js)                               | [README](graphs/Y.md)                                                                                |
 | [Z. Железные дороги](graphs/Z.js)                            | [README](graphs/Z.md)                                                                                |
 
@@ -144,6 +147,7 @@
 | [K. Гороскопы](greedyAlgorithms/K.js)                       | Находит наибольшую общую подпоследовательность                            |
 | [L. Золото лепреконов](greedyAlgorithms/LOneDimensional.js) | Решает задачу о рюкзаке методом динамического программирования            |
 | [L. Золото лепреконов](greedyAlgorithms/LTwoDimensional.js) | Решает задачу о рюкзаке методом двумерного динамического программирования |
+| ...                                                         |                                                                           |
 | [Y. Расстояние по Левенштейну](greedyAlgorithms/Y.js)       | [README](greedyAlgorithms/Y.md)                                           |
 | [Z. Одинаковые суммы](greedyAlgorithms/Z.js)                | [README](greedyAlgorithms/Z.md)                                           |
 
@@ -166,7 +170,10 @@
 | [H. Глобальная замена](strings/H.js)        | Заменяет в тексте все вхождения строки s на строку t                                         |
 | [K. Сравнить две строки](strings/K.js)      | Сравнивает строки, в которых есть только те буквы, которые стоят на четных позициях алфавита |
 | [L. Подсчёт префикс-функции](strings/L.js)  | Считает префикс-функцию для заданной строки                                                  |
+| ...                                         |                                                                                              |
+| [Y. Packed Prefix](strings/Y.js)            | [README](strings/Y.md)                                                                       |
+| [Z. Шпаргалка](strings/Z.js)                | [README](strings/Z.md)                                                                       |
 
-> [_Контест 1_](https://contest.yandex.ru/contest/26131/problems/)
+> [_Контест 1_](https://contest.yandex.ru/contest/26131/problems/), [_Контест 2_](https://contest.yandex.ru/contest/26133/problems/)
 
 </details>
