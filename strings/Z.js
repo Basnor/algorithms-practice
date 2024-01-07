@@ -1,47 +1,48 @@
-function KMP(text, pattern) {
-    const result = [];
-
-    let lps = new Array(pattern.length).fill(0);
-    computeLPS(pattern, lps);
-
-    let i = 0;
-    let j = 0;
-    while (i < text.length) {
-        if (pattern[j] == text[i]) {
-            j++;
-            i++;
-        }
-
-        if (j == pattern.length) {
-            result.push(i - j);
-            j = lps[j - 1];
-        } else if (i < text.length && pattern[j] != text[i]) {
-            if (j != 0) {
-                j = lps[j - 1];
-            } else {
-                i = i + 1;
-            }
-        }
+class Node {
+    constructor(value = null, level = 0) {
+        this.value = value;
+        this.level = level;
+        this.isEndOfWord = false;
+        this.children = {};
     }
-
-    return result;
 }
 
-function computeLPS(pattern, lps) {
-    let length = 0;
-    let i = 1;
+class Trie {
+    constructor() {
+        this.root = new Node();
+    }
 
-    while (i < pattern.length) {
-        if (pattern[i] == pattern[length]) {
-            length++;
-            lps[i] = length;
-            i++;
-        } else {
-            if (length != 0) {
-                length = lps[length - 1];
-            } else {
-                lps[i] = 0;
-                i++;
+    insert(word) {
+        let current = this.root;
+
+        for (let i = 0; i < word.length; i++) {
+            const character = word[i];
+
+            if (current.children[character] === undefined) {
+                current.children[character] = new Node(character, i + 1);
+            }
+
+            current = current.children[character];
+        }
+
+        current.isEndOfWord = true;
+    }
+
+    match(text, dp) {
+        for (let i = 0; i < text.length; i++) {
+            let current = this.root;
+            let j = i;
+
+            while (current.children[text[j]] !== undefined) {
+                current = current.children[text[j]];
+
+                if (current.isEndOfWord) {
+                    if (dp[j - current.level + 1] === true) {
+                        dp[j + 1] = true;
+                    }
+                }
+
+                j++;
             }
         }
     }
@@ -50,7 +51,7 @@ function computeLPS(pattern, lps) {
 const dictionary = [];
 let lineCounter = 0,
     linesNumber,
-    cheatText;
+    text;
 const readline = require("readline");
 const fs = require("fs");
 const path = require("path");
@@ -60,7 +61,7 @@ const rl = readline.createInterface({
 
 rl.on("line", (line) => {
     if (lineCounter === 0) {
-        cheatText = line;
+        text = line;
         lineCounter++;
         return;
     }
@@ -77,16 +78,17 @@ rl.on("line", (line) => {
     }
 
     if (lineCounter - 2 === linesNumber) {
-        dictionary.sort((a, b) => b.length - a.length);
-        let i = 0;
+        const trie = new Trie();
 
         for (const word of dictionary) {
-            const indexes = KMP(cheatText, word);
-
-            i += indexes.length * word.length;
+            trie.insert(word);
         }
 
-        if (i >= cheatText.length) {
+        const dp = new Array(text.length + 1).fill(false);
+        dp[0] = true;
+        trie.match(text, dp);
+
+        if (dp[text.length] === true) {
             console.log("YES");
         } else {
             console.log("NO");
