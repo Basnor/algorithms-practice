@@ -17,7 +17,8 @@
 | [H. Двоичная система](introduction/H.js)        | Складывает две строки в двоичной системе счисления               |
 | [I. Степень четырёх](introduction/I.js)         | Определяет, будет ли положительное целое число степенью четвёрки |
 | [J. Факторизация](introduction/J.js)            | Раскладывает числа на простые множители                          |
-| ...                                             |                                                                  |
+| [K. Списочная форма](introduction/K.js)         | Сложение на основе полиномиальных коэффициентов                  |
+| [L. Лишняя буква](introduction/L.js)            | Находит лишнюю букву                                             |
 | [Y. Ближайший ноль](introduction/Y.js)          | Считает расстояния до ближайшего нуля за O(n)                    |
 | [Z. Ловкость рук](introduction/Z.js)            | Считает сумму элементов в **матрице**                            |
 
@@ -41,6 +42,8 @@
 | ...                                                         |                                    |
 | [Y. Дек](basicDataStructures/Y.js)                          | [README](basicDataStructures/Y.md) |
 | [Z. Калькулятор](basicDataStructures/Z.js)                  | [README](basicDataStructures/Z.md) |
+
+> [_Контест 1_](https://contest.yandex.ru/contest/22779/problems/), [_Контест 2_](https://contest.yandex.ru/contest/22781/problems/)
 
 </details>
 
