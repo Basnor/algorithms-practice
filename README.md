@@ -41,6 +41,7 @@
 | [F. Стек - Max](basicDataStructures/F.js)                   | Стек LIFO                                 |
 | [G. Стек - MaxEffective](basicDataStructures/G.js)          | Стек LIFO cо стеком максимальных значений |
 | [H. Скобочная последовательность](basicDataStructures/H.js) |                                           |
+| [I. Ограниченная очередь](basicDataStructures/I.js)         |                                           |
 | ...                                                         |                                           |
 | [Y. Дек](basicDataStructures/Y.js)                          | [README](basicDataStructures/Y.md)        |
 | [Z. Калькулятор](basicDataStructures/Z.js)                  | [README](basicDataStructures/Z.md)        |
