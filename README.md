@@ -43,8 +43,8 @@
 | [H. Скобочная последовательность](basicDataStructures/H.js) |                                           |
 | [I. Ограниченная очередь](basicDataStructures/I.js)         |                                           |
 | [J. Списочная очередь](basicDataStructures/J.js)            | Очередь на связном списке                 |
-| [K. Рекурсивные числа Фибоначчи](basicDataStructures/K.js)  | Рекурсивное Фибоначчи                              |
-| ...                                                         |                                           |
+| [K. Рекурсивные числа Фибоначчи](basicDataStructures/K.js)  | Рекурсивное Фибоначчи                     |
+| [L. Фибоначчи по модулю](basicDataStructures/L.js)          |                                           |
 | [Y. Дек](basicDataStructures/Y.js)                          | [README](basicDataStructures/Y.md)        |
 | [Z. Калькулятор](basicDataStructures/Z.js)                  | [README](basicDataStructures/Z.md)        |
 
