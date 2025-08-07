@@ -63,6 +63,7 @@
 | [A. Генератор скобок (фильтрация ПСП)](recursionAndSorting/AStack.js)    | Генерация всех скобочных последовательностей |
 | [B. Комбинации](recursionAndSorting/B.js)                                |                                              |
 | [C. Подпоследовательность](recursionAndSorting/C.js)                     |                                              |
+| [D. Печеньки](recursionAndSorting/D.js)                                  | O(n log n + m log m)                         |
 | [H. Большое число](recursionAndSorting/H.js)                             |                                              |
 | [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
 | [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
