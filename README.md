@@ -72,6 +72,7 @@
 | [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
 | [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
 | [L. Два велосипеда](recursionAndSorting/L.js)                            |                                              |
+| [M. Золотая середина](recursionAndSorting/M.js)                          | Медиана двух отсортированных массивов        |
 | [N. Клумбы](recursionAndSorting/N.js)                                    |                                              |
 | ...                                                                      |                                              |
 | [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)                 | [README](recursionAndSorting/Y.md)           |
