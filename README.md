@@ -66,6 +66,7 @@
 | [D. Печеньки](recursionAndSorting/D.js)                                  | O(n log n + m log m)                         |
 | [E. Покупка домов](recursionAndSorting/E.js)                             | O(n log n)                                   |
 | [F. Периметр треугольника](recursionAndSorting/F.js)                     | Наибольшая сумма                             |
+| [G. Гардероб](recursionAndSorting/G.js)                                  | Сортировка массива из 3-х значений за n      |
 | [H. Большое число](recursionAndSorting/H.js)                             |                                              |
 | [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
 | [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
