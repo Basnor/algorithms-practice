@@ -68,6 +68,7 @@
 | [F. Периметр треугольника](recursionAndSorting/F.js)                     | Наибольшая сумма                             |
 | [G. Гардероб](recursionAndSorting/G.js)                                  | Сортировка массива из 3-х значений за n      |
 | [H. Большое число](recursionAndSorting/H.js)                             |                                              |
+| [I. Любители конференций](recursionAndSorting/I.js)                      | Мапа по количеству встречающихся id          |
 | [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
 | [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
 | [L. Два велосипеда](recursionAndSorting/L.js)                            |                                              |
