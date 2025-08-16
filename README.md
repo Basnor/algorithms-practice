@@ -57,26 +57,28 @@
 <details>
 <summary>Список задач</summary>
 
-| Задача                                                                   | Описание                                     |
-|--------------------------------------------------------------------------|----------------------------------------------|
-| [A. Генератор скобок (бектрекинг)](recursionAndSorting/ABacktracking.js) | Генерация скобочных последовательностей      |
-| [A. Генератор скобок (фильтрация ПСП)](recursionAndSorting/AStack.js)    | Генерация всех скобочных последовательностей |
-| [B. Комбинации](recursionAndSorting/B.js)                                |                                              |
-| [C. Подпоследовательность](recursionAndSorting/C.js)                     |                                              |
-| [D. Печеньки](recursionAndSorting/D.js)                                  | O(n log n + m log m)                         |
-| [E. Покупка домов](recursionAndSorting/E.js)                             | O(n log n)                                   |
-| [F. Периметр треугольника](recursionAndSorting/F.js)                     | Наибольшая сумма                             |
-| [G. Гардероб](recursionAndSorting/G.js)                                  | Сортировка массива из 3-х значений за n      |
-| [H. Большое число](recursionAndSorting/H.js)                             |                                              |
-| [I. Любители конференций](recursionAndSorting/I.js)                      | Мапа по количеству встречающихся id          |
-| [J. Пузырёк](recursionAndSorting/J.js)                                   |                                              |
-| [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                              |
-| [L. Два велосипеда](recursionAndSorting/L.js)                            |                                              |
-| [M. Золотая середина](recursionAndSorting/M.js)                          | Медиана двух отсортированных массивов        |
-| [N. Клумбы](recursionAndSorting/N.js)                                    |                                              |
-| ...                                                                      |                                              |
-| [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)                 | [README](recursionAndSorting/Y.md)           |
-| [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js)            | [README](recursionAndSorting/Z.md)           |
+| Задача                                                                   | Описание                                                        |
+|--------------------------------------------------------------------------|-----------------------------------------------------------------|
+| [A. Генератор скобок (бектрекинг)](recursionAndSorting/ABacktracking.js) | Генерация скобочных последовательностей                         |
+| [A. Генератор скобок (фильтрация ПСП)](recursionAndSorting/AStack.js)    | Генерация всех скобочных последовательностей                    |
+| [B. Комбинации](recursionAndSorting/B.js)                                |                                                                 |
+| [C. Подпоследовательность](recursionAndSorting/C.js)                     |                                                                 |
+| [D. Печеньки](recursionAndSorting/D.js)                                  | O(n log n + m log m)                                            |
+| [E. Покупка домов](recursionAndSorting/E.js)                             | O(n log n)                                                      |
+| [F. Периметр треугольника](recursionAndSorting/F.js)                     | Наибольшая сумма                                                |
+| [G. Гардероб](recursionAndSorting/G.js)                                  | Сортировка массива из 3-х значений за n                         |
+| [H. Большое число](recursionAndSorting/H.js)                             |                                                                 |
+| [I. Любители конференций](recursionAndSorting/I.js)                      | Мапа по количеству встречающихся id                             |
+| [J. Пузырёк](recursionAndSorting/J.js)                                   |                                                                 |
+| [K. Сортировка слиянием](recursionAndSorting/J.js)                       |                                                                 |
+| [L. Два велосипеда](recursionAndSorting/L.js)                            |                                                                 |
+| [M. Золотая середина](recursionAndSorting/M.js)                          | O(m + n) Медиана двух отсортированных массивов                  |
+| [M. Золотая середина](recursionAndSorting/M2.js)                         | O(log(m + n)) Медиана двух отсортированных массивов             |
+| [N. Клумбы](recursionAndSorting/N.js)                                    |                                                                 |
+| [O. Разность треш-индексов](recursionAndSorting/O.js)                    | Pivot как среднее между максимальным и минимальным элементом    |
+| [P. Частичная сортировка](recursionAndSorting/P.js)                      | Количество отрезков для быстрой сортировки в перестановке чисел |
+| [Y. Поиск в сломанном массиве](recursionAndSorting/Y.js)                 | [README](recursionAndSorting/Y.md)                              |
+| [Z. Эффективная быстрая сортировка](recursionAndSorting/Z.js)            | [README](recursionAndSorting/Z.md)                              |
 
 > [_Контест 1_](https://contest.yandex.ru/contest/23638/problems/), [_Контест 2_](https://contest.yandex.ru/contest/23815/problems/)
 
